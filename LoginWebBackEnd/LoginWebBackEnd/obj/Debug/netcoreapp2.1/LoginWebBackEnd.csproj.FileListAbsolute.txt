@@ -1,0 +1,14 @@
+C:\Users\v-girama\source\repos\LoginWebBackEnd\LoginWebBackEnd\bin\Debug\netcoreapp2.1\LoginWebBackEnd.deps.json
+C:\Users\v-girama\source\repos\LoginWebBackEnd\LoginWebBackEnd\bin\Debug\netcoreapp2.1\LoginWebBackEnd.runtimeconfig.json
+C:\Users\v-girama\source\repos\LoginWebBackEnd\LoginWebBackEnd\bin\Debug\netcoreapp2.1\LoginWebBackEnd.runtimeconfig.dev.json
+C:\Users\v-girama\source\repos\LoginWebBackEnd\LoginWebBackEnd\bin\Debug\netcoreapp2.1\LoginWebBackEnd.dll
+C:\Users\v-girama\source\repos\LoginWebBackEnd\LoginWebBackEnd\obj\Debug\netcoreapp2.1\LoginWebBackEnd.csprojAssemblyReference.cache
+C:\Users\v-girama\source\repos\LoginWebBackEnd\LoginWebBackEnd\obj\Debug\netcoreapp2.1\LoginWebBackEnd.csproj.CoreCompileInputs.cache
+C:\Users\v-girama\source\repos\LoginWebBackEnd\LoginWebBackEnd\obj\Debug\netcoreapp2.1\LoginWebBackEnd.RazorAssemblyInfo.cache
+C:\Users\v-girama\source\repos\LoginWebBackEnd\LoginWebBackEnd\obj\Debug\netcoreapp2.1\LoginWebBackEnd.RazorAssemblyInfo.cs
+C:\Users\v-girama\source\repos\LoginWebBackEnd\LoginWebBackEnd\obj\Debug\netcoreapp2.1\LoginWebBackEnd.AssemblyInfoInputs.cache
+C:\Users\v-girama\source\repos\LoginWebBackEnd\LoginWebBackEnd\obj\Debug\netcoreapp2.1\LoginWebBackEnd.AssemblyInfo.cs
+C:\Users\v-girama\source\repos\LoginWebBackEnd\LoginWebBackEnd\obj\Debug\netcoreapp2.1\LoginWebBackEnd.RazorTargetAssemblyInfo.cache
+C:\Users\v-girama\source\repos\LoginWebBackEnd\LoginWebBackEnd\bin\Debug\netcoreapp2.1\LoginWebBackEnd.pdb
+C:\Users\v-girama\source\repos\LoginWebBackEnd\LoginWebBackEnd\obj\Debug\netcoreapp2.1\LoginWebBackEnd.dll
+C:\Users\v-girama\source\repos\LoginWebBackEnd\LoginWebBackEnd\obj\Debug\netcoreapp2.1\LoginWebBackEnd.pdb
