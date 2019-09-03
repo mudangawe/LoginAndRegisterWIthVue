@@ -119,7 +119,7 @@ export default {
                 await services.postApplication(this.profile);
             }
             catch(error) {
-               alert("httpError", "Failed to save application", error);
+               alert(error, "Failed to save application", error);
             }
         }
         

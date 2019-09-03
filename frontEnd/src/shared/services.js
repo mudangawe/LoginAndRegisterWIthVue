@@ -1,6 +1,5 @@
 import Configuration from "./config";
-import { resolve } from "dns";
-import { reject } from "q";
+
 
 let post = function(url,body,async)
 {
@@ -53,7 +52,7 @@ export default{
         return JSON.parse(await post(`${Configuration.serviceURL}/api/login`,application,true));
     },
 
-    getApplication: async function (userToken) {
+    getApplication: async function () {
         return JSON.parse(await get(`${Configuration.serviceURL}/api/login`, true));
     }
 }

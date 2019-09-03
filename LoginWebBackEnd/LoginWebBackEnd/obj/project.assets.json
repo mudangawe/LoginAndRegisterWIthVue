@@ -12972,11 +12972,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\v-girama\\source\\repos\\LoginWebBackEnd\\LoginWebBackEnd\\LoginWebBackEnd.csproj",
+      "projectUniqueName": "C:\\Source\\loginwithVuw\\LoginWebBackEnd\\LoginWebBackEnd\\LoginWebBackEnd.csproj",
       "projectName": "LoginWebBackEnd",
-      "projectPath": "C:\\Users\\v-girama\\source\\repos\\LoginWebBackEnd\\LoginWebBackEnd\\LoginWebBackEnd.csproj",
+      "projectPath": "C:\\Source\\loginwithVuw\\LoginWebBackEnd\\LoginWebBackEnd\\LoginWebBackEnd.csproj",
       "packagesPath": "C:\\Users\\v-girama\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\v-girama\\source\\repos\\LoginWebBackEnd\\LoginWebBackEnd\\obj\\",
+      "outputPath": "C:\\Source\\loginwithVuw\\LoginWebBackEnd\\LoginWebBackEnd\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
