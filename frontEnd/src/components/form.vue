@@ -36,7 +36,7 @@
       </ul>
     </div>
     <div class="row">
-      <input type="Submit" text="Submit" @click="checkForm" />
+      <input type="Submit" text="Submit" @click="VerifyInput" />
     </div>
   </section>
 </template>
@@ -61,8 +61,7 @@ export default {
                      {message:"Password must have atleast one upper case letter"},
                      {message:"Password must have atleast one lower case letter"}
                     ],
-      changePage:false
-            
+      changePage:null        
     }
   },
  computed: {
@@ -73,17 +72,27 @@ export default {
       return this.profile.email;
     }
   },
-
+  
   methods: {
+    respondToUser(){
+        alert(this.changePage);
+        if(this.changePage)
+        {
+          this.$emit("submit", true);
+         
+          this.isPasswordRules = false;
+        }
+        else
+        {
+          this.isPasswordRules = true;
+        }
+    },
       validEmail: function (email) {
           var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
           return re.test(email);}
       ,
-      respondToUser(){
       
-        
-      },
-      checkForm(){
+      VerifyInput(){
             if(!this.profile.email)
             {
               this.isEmailvalid = true;
@@ -116,13 +125,18 @@ export default {
         async save() {
             
             try { 
-                await services.postApplication(this.profile);
+                this.changePage = await services.postApplication(this.profile);
             }
             catch(error) {
                alert(error, "Failed to save application", error);
             }
         }
         
+        },
+        watch: {
+          changePage(){
+                this.respondToUser();
+          }
         }
   }; 
 

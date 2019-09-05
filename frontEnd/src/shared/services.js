@@ -18,7 +18,7 @@ let post = function(url,body,async)
             }
         }
         http.open('POST',url,async);
-        http.response = 'text';
+      
         http.setRequestHeader('Content-type','application/json');
         http.send(JSON.stringify(body));
     }
@@ -49,10 +49,10 @@ let get = function (url, async) {
 
 export default{
     postApplication: async function(application){
-        return JSON.parse(await post(`${Configuration.serviceURL}/api/login`,application,true));
+        return JSON.parse(await post("https://localhost:44332/api/login",application,true));
     },
 
     getApplication: async function () {
-        return JSON.parse(await get(`${Configuration.serviceURL}/api/login`, true));
+        return JSON.parse(await get(`https://localhost:44332/api/login`, true));
     }
 }

@@ -2,10 +2,10 @@
   <div id="app" data-grid="container">
     <div id="loginPage" v-if="isLogin">
       <heading></heading>
-      <loginForm @passO="changeForm"></loginForm>
+      <loginForm @submit="changeForm"></loginForm>
     </div>
     <div id="registerPage" v-else>
-      <heading></heading>
+      <heading ></heading>
       <register></register>
     </div>
     <footerhere></footerhere>
