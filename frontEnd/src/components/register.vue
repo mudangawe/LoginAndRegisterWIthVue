@@ -1,7 +1,5 @@
 <template>
    <section aria-label="Form">
-         
-              <legend>Register New User </legend>
               <div>
                   <div>
                       <label class = "row" id="default">Name: </label>
@@ -40,7 +38,7 @@
                   </div>
               </div>
                <div class = "row">
-              <input  type="submit" value="Submit" @click="VerifyInput" />
+              <input  type="submit" value="Submit" @click="VerifyInput()" />
               </div>
          
       </section>

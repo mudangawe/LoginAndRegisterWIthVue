@@ -1,14 +1,13 @@
 <template>
   <div id="app" data-grid="container">
-    <div id="loginPage" v-if="isLogin">
-      <heading></heading>
-      <loginForm @submit="changeForm"></loginForm>
+    <heading v-bind:title="titlehead"></heading>
+    <div id="loginPage" v-if="isLoginPage"> 
+      <loginForm ></loginForm>
     </div>
     <div id="registerPage" v-else>
-      <heading ></heading>
       <register></register>
     </div>
-    <footerhere></footerhere>
+    <footerhere @submit="changeForm" ></footerhere>
   </div>
 </template>
 
@@ -27,19 +26,27 @@ export default {
   },
   data() {
     return {
-      isLogin: true,
-      info: null
+      isLoginPage: true,
+      info: null,
+      titlehead: "Login page"
     };
   },
    methods: {
     
     changeForm(value){
-      if(value)
+      
+      if(!value &&   this.isLoginPage==true)
       {
-        this.isLogin =false
+        this.isLoginPage = false;
+        this.titlehead = "Register Page"
+      }
+      else{
+        this.isLoginPage = true;
+        this.titlehead = "Login page"
       }
     }
-  }
+  },
+ 
 };
 </script>
 

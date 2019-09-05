@@ -1,12 +1,24 @@
 <template>
   <div>
-      <h1> Login Page</h1>
+      <h1> {{headingtitle}}</h1>
   </div>    
 </template>
 
 <script>
+import { watch } from 'fs';
 export default {
-name:"heading"
+  props:{
+     title: String
+  },
+name:"heading",
+  
+data(){ return{headingtitle: this.title}},
+
+watch:{
+title(){
+    this.headingtitle = this.title
+}
+}
 }
 </script>
 

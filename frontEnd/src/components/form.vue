@@ -65,12 +65,37 @@ export default {
     }
   },
  computed: {
-    // a computed getter
-    reversedMessage: function () {
-      // `this` points to the vm instance
-      console.log(this.profile.email)
-      return this.profile.email;
-    }
+    VerifyInput(){
+            if(!this.profile.email)
+            {
+              this.isEmailvalid = true;
+              this.msg[0] = "Email is requred"
+            }
+             else if(!this.validEmail(this.profile.email))
+            {
+                  this.msg[0] = "Enter valid Email"
+            }
+            else 
+            { this.isEmailvalid = false;}
+            if(!this.profile.password)
+            {
+              this.isPasswordValid = true;
+              this.msg[1] = "Password is requred"
+            }
+            else if(!this.profile.password.length > 6)
+            {
+              this.msg[1] = "Password must have at least 6 character"
+              this.isPasswordValid = true;
+            }
+            else { this.isPasswordValid = false;}
+
+            if(this.isPasswordValid == false && this.isEmailvalid == false)
+            {
+              console.log(true);
+              this.save();
+            }
+        }
+    
   },
   
   methods: {
