@@ -43,7 +43,7 @@
 
 <script>
 //import axios from "axios";
-import { required, email, minLength } from "vuelidate/lib/validators";
+//import { required, email, minLength } from "vuelidate/lib/validators";
 import services from "../shared/services";
 export default {
   
@@ -89,18 +89,18 @@ export default {
           this.isPasswordRules = true;
         }
     },
-      validEmail: function (email) {
+      isEmailValid: function (email) {
           var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
           return re.test(email);}
       ,
-      validPassword(password){
+      isPasswordCorrect(password){
         var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
         return strongRegex.test(password);
       },
       VerifyInput(){
             if(!this.isPasswordValid && !this.isEmailvalid &&  this.isPasswordVerified && this.isEmailVerified )
             {
-              if(this.validPassword(this.profile.password))
+              if(this.isPasswordValid(this.profile.password))
               {
                    this.isPasswordRules = false;
                    this.save();
@@ -113,8 +113,8 @@ export default {
             }
             else{
               alert("here")
-               this.$el.isPasswordValid = true;
-               this.$el.isEmailvalid = true
+               this.isPasswordValid = true;
+               this.isEmailvalid = true
             }
         },
 
@@ -138,7 +138,7 @@ export default {
               this.isEmailVerified=false;
               this.msg[0] = "Email is requred"
             }
-             else if(!this.validEmail(this.profile.email))
+             else if(!this.isEmailValid(this.profile.email))
             {
                   this.isEmailVerified=false;
                   this.msg[0] = "Enter valid Email"
