@@ -1,44 +1,61 @@
 <template>
    <section aria-label="Form">
               <div>
-                  <div>
-                      <label class = "row" >Name: </label>
-                      <input v-model="profile.Name"  class = "row" />
+                  <div class="form-group row">
+                     <label class="col-sm-2 col-form-label">Name</label>
+                      <div class="col-sm-8">
+                      <input v-model="profile.Name"  class="form-control"  />
+                       </div>
                       <span class="row text-danger text-danger" v-if="error[0]">Name required</span>
                   </div>
-                  <div >
-                      <label class = "row">Surname: </label>
-                      <input class = "row"  v-model="profile.Surname" />
+                  <div class="form-group row">
+                      <label class="col-sm-2 col-form-label">Surname </label>
+                      <div class="col-sm-8">
+                      <input  class="form-control" v-model="profile.Surname" />
+                      </div>
                       <span class="row text-danger" v-if="error[1]">Surname required</span>
                   </div>
-                  <div >
-                      <label class = "row">Email: </label>
-                      <input  v-model="profile.Email" class = "row"/>
+                  <div class="form-group row" >
+                      <label class="col-sm-2 col-form-label">Email </label>
+                       <div class="col-sm-8">
+                      <input  v-model="profile.Email" class="form-control"/>
+                      </div>
+                      
                       <span class="row text-danger" v-if="error[2]">{{errorEmail}}</span>
                   </div>
-                  <div >
-                      <label class = "row">Contact: </label>
-                      <input  v-model="profile.Contact" class = "row"/>
+                  <div class="form-group row">
+                      <label class="col-sm-2 col-form-label">Contact </label>
+                       <div class="col-sm-8">
+                         <input  v-model="profile.Contact"  class="form-control"/>
+                      </div>
                       <span class="row text-danger" v-if="error[3]">{{errorNumber}}</span>
                   </div>
-                  <div >
-                      <label class = "row" >Address: </label>
-                      <input   v-model="profile.Address" class = "row"/>
+                  <div class="form-group row">
+                      <label class="col-sm-2 col-form-label" >Address </label>
+                       <div class="col-sm-8">
+                      <input   v-model="profile.Address"  class="form-control"/>
+                      </div>
                       <span class="row text-danger" v-if="error[4]"> Address required </span>
                   </div>
-                  <div >
-                      <label class = "row">Password: </label>
-                      <input  class = "row"   type="password" v-model="profile.Password"/>
+                  <div class="form-group row">
+                      <label class="col-sm-2 col-form-label">Password </label>
+                      <div class="col-sm-8">
+                      <input  class="form-control"   type="password" v-model="profile.Password"/>
+                      </div>
                       <span class="row text-danger" v-if="error[5]"> {{errorPassword}} </span>
                   </div>
-                  <div >
-                      <label class = "row" >Re-Password: </label>
-                      <input v-model="profile.RePassword"  type="password"  class = "row" />
+                  <div class="form-group row" >
+                      <label class="col-sm-2 col-form-label" >Confirm Password </label>
+                      <div class="col-sm-8">
+                      <input v-model="profile.RePassword"  type="password"  class = "form-control" />
+                      </div>
                       <span class="row text-danger" v-if="error[6]">{{rePassword}}</span>
                   </div>
               </div>
-               <div class = "row">
-              <input  type="submit" value="Submit" @click="VerifyInput()" :disabled="isDisable" />
+               <div class="form-group row">
+                <div class="col-sm-10">
+                <input  type="submit" value="Submit" @click="VerifyInput()" :disabled="isDisable" />
+              </div>
               </div>
          
       </section>

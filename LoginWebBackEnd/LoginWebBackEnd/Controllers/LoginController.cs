@@ -40,8 +40,6 @@ namespace LoginWebBackEnd.Controllers
                 {
                     return false;
                 }
-
-
             }
             else if (obj.Name != null)
             {

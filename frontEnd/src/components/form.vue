@@ -1,33 +1,30 @@
 <template>
   <section aria-label="Form">
-    
-    <div>
-     <label class="row">
-        Email
-        <span class="text-danger">*</span>
-      </label>
-      <div class="row">
-      <input id="default" required type="text" name="Email" v-model="profile.email" />
-      </div>
-       <div class="row">
-      <span v-show="isEmailvalid" class="text-danger">{{msg[0]}}</span>
-      </div>
+   
+    <div class="form-group row">
+    <label  class="col-sm-2 col-form-label">Email</label>
+    <div class="col-sm-8">
+      <input type="email" class="form-control" v-model="email" placeholder="Email">
     </div>
-    <div>
-      <label class="row">
-        Password
-        <span class="text-danger">*</span>
-      </label>
-      <div class="row">
-      <input id="default" type="password" name="password" v-model="profile.password"  />
-     
+  </div>
+  <div class="form-group row">
+          <span v-show="isEmailValid" class="col-sm-8 col-form-label  text-danger"> 
+              {{msg[0]}}
+            </span>
+       </div>
+
+    <div class="form-group row">
+        <label  class="col-sm-2 col-form-label">Password</label>
+        <div class="col-sm-8">
+          <input type="password" class="form-control" v-model="password" placeholder="Password">
+        </div>
     </div>
-    <div class="row">
-       <span v-show="isPasswordValid" class="text-danger"> 
-          {{msg[1]}}
-         </span>
-    </div>
-    </div>
+        <div class="form-group row">
+          <span v-show="isPasswordValid" class="col-sm-8 col-form-label  text-danger"> 
+              {{msg[1]}}
+            </span>
+       </div>
+   
     <div v-if="isPasswordRules">
        <ul id="passwordrules">
           <li v-for="item in passwordRules" v-bind:key="item.id">
@@ -35,25 +32,27 @@
         </li>
       </ul>
     </div>
-    <div class="row">
+     <div class="form-group row">
+    <div class="col-sm-10">
       <input type="Submit" text="Submit" @click="VerifyInput"  :disabled="isDisabled"/>
-    </div>
+     </div>
+  </div>
   </section>
 </template>
 
 <script>
-//import axios from "axios";
-//import { required, email, minLength } from "vuelidate/lib/validators";
+
 import services from "../shared/services";
+
 export default {
   
   name: "loginForm",
   data() {
     return {
-      profile: {
-        email: null,
-        password: null
-              },
+      
+      email: null,
+      password: null,
+              
       isPasswordValid: false,
       isEmailvalid: false,
       isPasswordVerified: false,
@@ -100,7 +99,7 @@ export default {
       VerifyInput(){
             if(!this.isPasswordValid && !this.isEmailvalid &&  this.isPasswordVerified && this.isEmailVerified )
             {
-              if(this.isPasswordValid(this.profile.password))
+              if(this.isPasswordValid(this.password))
               {
                    this.isPasswordRules = false;
                    this.save();
@@ -130,31 +129,32 @@ export default {
         
         },
         watch: {
-          'profile.email'(){
+          email(){
             
-            if(!this.profile.email)
+            if(!this.email)
             {
-              this.isEmailvalid = true;
+              this.isEmailvalid = false;
               this.isEmailVerified=false;
               this.msg[0] = "Email is requred"
             }
-             else if(!this.isEmailValid(this.profile.email))
+             else if(!this.isEmailValid(this.email))
             {
-                  this.isEmailVerified=false;
+                  this.isEmailVerified=true;
+                    this.isEmailvalid = true;
                   this.msg[0] = "Enter valid Email"
             }
             else 
             { this.isEmailvalid = false;
               this.isEmailVerified=true;}
           },
-          'profile.password'(){
-            if(!this.profile.password)
+          password(){
+            if(!this.password)
             {
               this.isPasswordValid = true;
               this.msg[1] = "Password is requred";
               this.isPasswordVerified = false
             }
-            else if(this.profile.password.length < 6)
+            else if(this.password.length < 6)
             {
               this.msg[1] = "Password must have at least 6 character";
               this.isPasswordValid = true;
