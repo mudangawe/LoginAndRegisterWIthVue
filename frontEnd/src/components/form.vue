@@ -1,37 +1,30 @@
 <template>
   <section aria-label="Form">
-   
-    <div class="form-group row">
-    <label  class="col-sm-2 col-form-label">Email</label>
-    <div class="col-sm-8">
-      <input type="email" class="form-control" v-model="email" placeholder="Email">
-    </div>
-  </div>
-  <div class="form-group row">
-          <span v-show="isEmailValid" class="col-sm-8 col-form-label  text-danger"> 
-              {{msg[0]}}
-            </span>
-       </div>
-
-    <div class="form-group row">
-        <label  class="col-sm-2 col-form-label">Password</label>
-        <div class="col-sm-8">
-          <input type="password" class="form-control" v-model="password" placeholder="Password">
-        </div>
-    </div>
-        <div class="form-group row">
-          <span v-show="isPasswordValid" class="col-sm-8 col-form-label  text-danger"> 
-              {{msg[1]}}
-            </span>
-       </div>
-   
-    <div v-if="isPasswordRules">
+    <div class="form-group row" v-if="isPasswordRules">
+    
        <ul id="passwordrules">
           <li v-for="item in passwordRules" v-bind:key="item.id">
           {{ item.message }}
         </li>
       </ul>
     </div>
+    <div class="form-group row">
+    <label  class="col-sm-3 col-form-label">Email<span v-show="isEmailValid" class="  text-danger">*</span></label>
+    <div class="col-sm-8">
+      <input type="email" class="form-control" v-model="email" placeholder="Email">
+    </div>
+  </div>
+  
+          
+       
+    <div class="form-group row">
+        <label  class="col-sm-3 col-form-label">Password <span v-show="isPasswordValid" class="text-danger">*</span>
+        </label>
+        <div class="col-sm-8">
+          <input type="password" class="form-control" v-model="password" placeholder="Password">
+        </div>
+    </div>
+   
      <div class="form-group row">
     <div class="col-sm-10">
       <input type="Submit" text="Submit" @click="VerifyInput"  :disabled="isDisabled"/>
@@ -99,10 +92,10 @@ export default {
       VerifyInput(){
             if(!this.isPasswordValid && !this.isEmailvalid &&  this.isPasswordVerified && this.isEmailVerified )
             {
-              if(this.isPasswordValid(this.password))
+              if(this.isPasswordCorrect(this.password))
               {
                    this.isPasswordRules = false;
-                   this.save();
+                   alert(this.save());
               }
               else
               {
@@ -118,9 +111,12 @@ export default {
         },
 
         async save() {
-            
+            const userdate ={
+              email: this.email,
+              password: this.password
+            }
             try { 
-                this.changePage = await services.postApplication(this.profile);
+                this.changePage = await services.postApplication(userdate);
             }
             catch(error) {
                alert(error, "Failed to save application", error);

@@ -2,54 +2,54 @@
    <section aria-label="Form">
               <div>
                   <div class="form-group row">
-                     <label class="col-sm-2 col-form-label">Name</label>
+                     <label class="col-sm-3 col-form-label">Name<span v-show="error[0]" class="text-danger">*</span></label>
                       <div class="col-sm-8">
                       <input v-model="profile.Name"  class="form-control"  />
                        </div>
-                      <span class="row text-danger text-danger" v-if="error[0]">Name required</span>
+                      
                   </div>
                   <div class="form-group row">
-                      <label class="col-sm-2 col-form-label">Surname </label>
+                      <label class="col-sm-3 col-form-label">Surname <span v-show="error[1]" class="text-danger">*</span> </label>
                       <div class="col-sm-8">
                       <input  class="form-control" v-model="profile.Surname" />
                       </div>
-                      <span class="row text-danger" v-if="error[1]">Surname required</span>
+                     
                   </div>
                   <div class="form-group row" >
-                      <label class="col-sm-2 col-form-label">Email </label>
+                      <label class="col-sm-3 col-form-label">Email<span v-show="error[2]" class="text-danger">*</span> </label>
                        <div class="col-sm-8">
                       <input  v-model="profile.Email" class="form-control"/>
                       </div>
                       
-                      <span class="row text-danger" v-if="error[2]">{{errorEmail}}</span>
+                      
                   </div>
                   <div class="form-group row">
-                      <label class="col-sm-2 col-form-label">Contact </label>
+                      <label class="col-sm-3 col-form-label">Contact<span v-show="error[3]" class="text-danger">*</span> </label>
                        <div class="col-sm-8">
                          <input  v-model="profile.Contact"  class="form-control"/>
                       </div>
-                      <span class="row text-danger" v-if="error[3]">{{errorNumber}}</span>
+                     
                   </div>
                   <div class="form-group row">
-                      <label class="col-sm-2 col-form-label" >Address </label>
+                      <label class="col-sm-3 col-form-label" >Address<span v-show="error[4]" class="text-danger">*</span> </label>
                        <div class="col-sm-8">
-                      <input   v-model="profile.Address"  class="form-control"/>
+                      <input  v-model="profile.Address"  class="form-control" />
                       </div>
-                      <span class="row text-danger" v-if="error[4]"> Address required </span>
+                    
                   </div>
                   <div class="form-group row">
-                      <label class="col-sm-2 col-form-label">Password </label>
+                      <label class="col-sm-3 col-form-label">Password <span v-show="error[5]" class="text-danger">*</span> </label>
                       <div class="col-sm-8">
                       <input  class="form-control"   type="password" v-model="profile.Password"/>
                       </div>
-                      <span class="row text-danger" v-if="error[5]"> {{errorPassword}} </span>
+                      
                   </div>
                   <div class="form-group row" >
-                      <label class="col-sm-2 col-form-label" >Confirm Password </label>
+                      <label class="col-sm-3 col-form-label" >Confirm Password <span v-show="error[6]" class="text-danger">*</span></label>
                       <div class="col-sm-8">
                       <input v-model="profile.RePassword"  type="password"  class = "form-control" />
                       </div>
-                      <span class="row text-danger" v-if="error[6]">{{rePassword}}</span>
+                      
                   </div>
               </div>
                <div class="form-group row">
