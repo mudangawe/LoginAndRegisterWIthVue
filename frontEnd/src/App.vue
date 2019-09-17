@@ -16,6 +16,7 @@ import heading from "./components/heading";
 import footerhere from "./components/footer";
 import loginForm from "./components/form";
 import register from "./components/register";
+
 export default {
   name: "app",
   components: {
@@ -23,6 +24,7 @@ export default {
     footerhere,
     loginForm,
     register
+   
   },
   data() {
     return {
@@ -31,9 +33,9 @@ export default {
       titlehead: "Login page"
     };
   },
-   methods: {
+  methods: {
     
-    changeForm(value){
+  changeForm(value){
       
       if(!value &&   this.isLoginPage==true)
       {

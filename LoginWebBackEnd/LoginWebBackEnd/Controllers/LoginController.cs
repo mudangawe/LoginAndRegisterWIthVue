@@ -14,42 +14,66 @@ namespace LoginWebBackEnd.Controllers
     {
 
         private readonly ProfileContext _profileContext;
-        [HttpGet]
-        public IEnumerable<LoginData> Get()
-        {
-            return _profileContext.loginData.ToList();
-        }
+        //[HttpGet]
+        //public IEnumerable<LoginData> Get()
+        //{
+        //    return " ";
+        //}
 
         public LoginController(ProfileContext profile)
         {
             _profileContext = profile;
         }
         [HttpPost]
-        public bool Post([FromBody] LoginData obj)
+        public object Post([FromBody] LoginData obj)
         {
 
             var isAvaluable = _profileContext.loginData.FirstOrDefault(row => obj.Email == row.Email);
-
+            ReturnData returnData = new ReturnData();
+           
             if (isAvaluable != null && obj.Name == null)
             {
                 if (isAvaluable.Password == obj.Password)
                 {
-                    return true;
+                    returnData.OutPut = true;
+                    returnData.message = "Login succefully";
+                    return (returnData);
                 }
                 else
                 {
-                    return false;
+                    returnData.OutPut = false;
+                    returnData.message = "Incorrect password";
+                    return returnData;
                 }
             }
-            else if (obj.Name != null)
+            if (isAvaluable == null && obj.Surname != null)
             {
-                obj.CreationDate = DateTime.Now;
                 _profileContext.loginData.Add(obj);
                 _profileContext.SaveChanges();
-                return true;
+                returnData.OutPut = true;
+                returnData.message = "Register successfully";
+                return (returnData);
             }
-            else { return false; }
+            else if (isAvaluable != null && obj.Surname != null)
+            {
+                returnData.OutPut = false;
+                returnData.message = "Email already exist";
+                return returnData;
+            }
+            returnData.OutPut = false;
+            returnData.message = "Email does not exist";
+            return returnData;
 
+        }
+        [HttpDelete]
+        public void Delete()
+        {
+            var all = from c in _profileContext.loginData select c;
+            if (all != null)
+            {
+                _profileContext.loginData.RemoveRange(all);
+                _profileContext.SaveChanges();
+            }
 
         }
     }

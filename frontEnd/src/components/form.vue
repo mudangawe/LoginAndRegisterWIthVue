@@ -1,15 +1,8 @@
 <template>
   <section aria-label="Form">
-    <div class="form-group row" v-if="isPasswordRules">
-    
-       <ul id="passwordrules">
-          <li v-for="item in passwordRules" v-bind:key="item.id">
-          {{ item.message }}
-        </li>
-      </ul>
-    </div>
+   
     <div class="form-group row">
-    <label  class="col-sm-3 col-form-label">Email<span v-show="isEmailValid" class="  text-danger">*</span></label>
+    <label  class="col-sm-3 col-form-label">Email<span v-if="isEmailvalid" class="  text-danger">*</span></label>
     <div class="col-sm-8">
       <input type="email" class="form-control" v-model="email" placeholder="Email">
     </div>
@@ -30,34 +23,34 @@
       <input type="Submit" text="Submit" @click="VerifyInput"  :disabled="isDisabled"/>
      </div>
   </div>
+  <message ref="child"></message>
   </section>
 </template>
 
 <script>
 
 import services from "../shared/services";
-
+import message from "./dialogs/message";
 export default {
-  
+  components:{
+    message
+  },
   name: "loginForm",
   data() {
     return {
-      
+      userData:null,
       email: null,
       password: null,
-              
       isPasswordValid: false,
       isEmailvalid: false,
       isPasswordVerified: false,
       isEmailVerified: false,
       isPasswordRules:false,
-      msg: ["",""],
       passwordRules:[{message:"Password must have 6 length of character"},
                      {message:"Password must have atleast one upper case letter"},
                      {message:"Password must have atleast one lower case letter"}
                     ],
-      changePage:null,
-             
+      changePage:null        
     }
   },
   
@@ -81,9 +74,9 @@ export default {
           this.isPasswordRules = true;
         }
     },
-      isEmailValid: function (email) {
+      isEmailValidInput: function () {
           var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-          return re.test(email);}
+          return re.test(this.email);}
       ,
       isPasswordCorrect(password){
         var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
@@ -92,22 +85,10 @@ export default {
       VerifyInput(){
             if(!this.isPasswordValid && !this.isEmailvalid &&  this.isPasswordVerified && this.isEmailVerified )
             {
-              if(this.isPasswordCorrect(this.password))
-              {
                    this.isPasswordRules = false;
-                   alert(this.save());
-              }
-              else
-              {
-                this.isPasswordRules = true;
-              }
-             
+                   let resp = this.save();
             }
-            else{
-              alert("here")
-               this.isPasswordValid = true;
-               this.isEmailvalid = true
-            }
+           
         },
 
         async save() {
@@ -116,44 +97,43 @@ export default {
               password: this.password
             }
             try { 
-                this.changePage = await services.postApplication(userdate);
+                this.userData = await services.postApplication(userdate);
+                this.$refs.child.showModal("Feedback", this.userData.message);
             }
             catch(error) {
-               alert(error, "Failed to save application", error);
+               alert(error, "System failure", error);
             }
         }
         
         },
         watch: {
           email(){
-            
+          
             if(!this.email)
             {
-              this.isEmailvalid = false;
+              this.isEmailvalid = true;
               this.isEmailVerified=false;
-              this.msg[0] = "Email is requred"
+              
             }
-             else if(!this.isEmailValid(this.email))
+             else if(this.isEmailValidInput())
             {
                   this.isEmailVerified=true;
-                    this.isEmailvalid = true;
-                  this.msg[0] = "Enter valid Email"
+                  this.isEmailvalid = false;
             }
             else 
-            { this.isEmailvalid = false;
-              this.isEmailVerified=true;}
+            { this.isEmailvalid = true;
+              this.isEmailVerified=false;}
           },
           password(){
             if(!this.password)
             {
               this.isPasswordValid = true;
-              this.msg[1] = "Password is requred";
+              
               this.isPasswordVerified = false
             }
-            else if(this.password.length < 6)
+            else if(!this.isPasswordCorrect(this.password))
             {
-              this.msg[1] = "Password must have at least 6 character";
-              this.isPasswordValid = true;
+               this.isPasswordValid = true;
                this.isPasswordVerified = false
             }
             else 

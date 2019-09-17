@@ -2,21 +2,29 @@
   "name": "xalafu",
   "version": "0.1.0",
   "private": true,
+  "description": "```\r npm install\r ```",
+  "author": "",
   "scripts": {
-    "start": "vue-cli-service serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "start": "vue-cli-service serve"
   },
+  "main": "babel.config.js",
   "dependencies": {
+    "@babel/runtime": "^7.6.0",
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
-    "core-js": "^2.6.5",
+    "bootstrap-vue": "^2.0.0-rc.19",
+    "core-js": "^3.2.1",
     "dns": "^0.2.2",
+    "intersection-observer": "^0.7.0",
     "jquery": "^3.4.1",
     "msal": "^1.1.1",
     "ngx-bootstrap": "^5.1.1",
     "popper.js": "^1.15.0",
+    "portal-vue": "^2.1.6",
+    "regenerator-runtime": "^0.13.3",
     "simple-vue-validator": "^0.16.0",
     "validate.js": "^0.13.1",
     "vue": "^2.6.10",
@@ -25,12 +33,27 @@
     "xhr-request": "^1.1.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "@babel/plugin-transform-runtime": "^7.6.0",
+    "@babel/polyfill": "^7.4.4",
+    "@babel/preset-env": "^7.6.0",
+    "@babel/preset-react": "^7.0.0",
     "@vue/cli-plugin-babel": "^3.9.0",
     "@vue/cli-plugin-eslint": "^3.9.0",
     "@vue/cli-service": "^3.9.0",
     "babel-eslint": "^10.0.1",
+    "babel-plugin-add-module-exports": "^1.0.2",
+    "babel-plugin-react-docgen": "^3.1.0",
+    "babel-plugin-styled-components": "^1.10.6",
+    "bootstrap": "^4.3.1",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "mutationobserver-shim": "^0.3.3",
+    "node-sass": "^4.12.0",
+    "popper.js": "^1.15.0",
+    "portal-vue": "^2.1.4",
+    "sass-loader": "^7.1.0",
+    "vue-cli-plugin-bootstrap-vue": "^0.4.0",
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {
@@ -62,8 +85,5 @@
     "> 1%",
     "last 2 versions"
   ],
-  "description": "```\r npm install\r ```",
-  "main": "babel.config.js",
-  "author": "",
   "license": "ISC"
 }

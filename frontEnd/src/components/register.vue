@@ -26,7 +26,7 @@
                   <div class="form-group row">
                       <label class="col-sm-3 col-form-label">Contact<span v-show="error[3]" class="text-danger">*</span> </label>
                        <div class="col-sm-8">
-                         <input  v-model="profile.Contact"  class="form-control"/>
+                         <input  v-model="profile.Contact"  class="form-control" maxlength="10"/>
                       </div>
                      
                   </div>
@@ -47,17 +47,16 @@
                   <div class="form-group row" >
                       <label class="col-sm-3 col-form-label" >Confirm Password <span v-show="error[6]" class="text-danger">*</span></label>
                       <div class="col-sm-8">
-                      <input v-model="profile.RePassword"  type="password"  class = "form-control" />
+                      <input v-model="profile.ConfirmPassword"  type="password"  class = "form-control" />
                       </div>
-                      
                   </div>
               </div>
-               <div class="form-group row">
+             <div class="form-group row">
                 <div class="col-sm-10">
-                <input  type="submit" value="Submit" @click="VerifyInput()" :disabled="isDisable" />
+                <input  type="submit" value="Submit" @click="save()" :disabled="isDisable" />
               </div>
               </div>
-         
+         <message ref="child"></message>
       </section>
 </template>
 
@@ -65,11 +64,15 @@
 
 <script>
 import services from "../shared/services";
+import message from "./dialogs/message";
 export default {
     name:"register",
-    props:{},
+    components:{
+        message
+    },
     data(){
         return{
+            isDisable:true,
             profile:{
                 Name:null,
                 Surname:null,
@@ -77,27 +80,33 @@ export default {
                 Contact:null,
                 Address:null,
                 Password:null,
-                RePassword:null
-
+                ConfirmPassword:null
             },
             error:[false,false,false,false,false,false,false],
             qualityInput:[true,true,true,true,false,true,true],
-            errorEmail:null,
-            rePassword:null,
-            errorNumber:null,
-            errorPassword:null,
+          
             
         }
     },
     computed:{
-            isDisable(){
-                return (this.error.every(this.isAllVerified))
-            },
-           
-
-
+            
     },
     methods:{
+        isDisableValid(){
+                let value = this.error.every(this.isAllVerified);
+                let values = this.qualityInput.every(this.isAllVerified);
+                if(!values)
+                {
+                    return (this.isDisable =true)
+                }
+                if(!value)
+                {
+                    return (this.isDisable =true)
+                }
+                this.isDisable = value && !values;
+               return(this.isDisable)
+               
+            },
         isPasswordCorrect(password){
         var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
         return strongRegex.test(password);
@@ -112,38 +121,22 @@ export default {
              var regexNumber =/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
              return regexNumber.test(this.profile.Contact);
          },
-        VerifyInput(){
-            if(this.profile.RePassword == null)
-            {
-                this.error[6] = true;
-                this.rePassword = "Repeat your password"
-            }
-            else
-            {
-                if(this.profile.RePassword == this.profile.Password)
-                {
-                     this.error[6] = true;
-                }
-                else
-                {
-                     this.rePassword = "Password does not match"
-                }
-            }
-            
-        },
+        
         
         async save() {
             
             try { 
-                this.changePage = await services.postApplication(this.profile);
+               this.userData = await services.postApplication(this.profile);
+               this.$refs.child.showModal("Feedback", String(this.userData.message));
             }
             catch(error) {
-               alert(error, "Failed to save application", error);
+               alert(error, "System failure", error);
             }
         }
     },
     watch:{
         'profile.Name'(){
+             this.isDisableValid();
             if(!this.profile.Name)
             {
                 this.error[0] = true;
@@ -156,10 +149,12 @@ export default {
             }
         },
         'profile.Surname'(){  
+            this.isDisableValid();
             if(!this.profile.Surname)
             {
                 this.qualityInput[1] = true;
                 this.error[1] = true;
+                
             }
             else
             {
@@ -167,10 +162,11 @@ export default {
                 this.error[1] = false;
             }},
         'profile.Email'(){
+                 this.isDisableValid();
                 if(!this.profile.Email)
                 {
                     this.error[2] = true;
-                    this.errorEmail = "Email required";
+                   
                     this.qualityInput[2] = true;
                 }
                 else
@@ -179,20 +175,22 @@ export default {
                     {
                       this.error[2] = false;
                       this.qualityInput[2] = false;
+                      this.isDisableValid();
                     }
                     else
                     {
-                        this.errorEmail = "Enter valid Email";
+                       
                         this.error[2] = true;
                         this.qualityInput[2] = true;
                     }
                 }
             },
             'profile.Contact'(){ 
+                
                 if(this.profile.Contact == null)
                 {
                     this.error[3] = true;
-                    this.errorNumber ="Number is required"
+                  
                 }
                 else
                 {
@@ -200,20 +198,23 @@ export default {
                     {
                          this.error[3] = false;
                          this.qualityInput[3] = false;
+                         this.isDisableValid();
                     }
                     else
                     {
+                         this.isDisableValid();
                         this.error[3] = true;
                         this.qualityInput[3] = true;
-                        this.errorNumber ="Enter valid number"
+                        
                     }
                }
             
             },
             'profile.Password'(){
+               
              if(!this.profile.Password)
              {
-                this.errorPassword = "Password is requred";
+              
                 this.error[5] = true;  
                 this.qualityInput[5] = true;              
              }
@@ -222,48 +223,44 @@ export default {
                  if(this.isPasswordCorrect(this.profile.Password))
                  {
                     this.error[5] = false;  
-                    this.qualityInput[5] = false;   
+                    this.qualityInput[5] = false;  
+                     this.isDisableValid(); 
                  }
                  else
                  {
-                    this.errorPassword = "Enter valid password";
+                   
                     this.qualityInput[5] = true;  
                     this.error[5] = true;
                  }
              }
             },
-            'profile.RePassword'(){
-            if(!this.profile.RePassword)
+            'profile.ConfirmPassword'(){
+            //this.isDisable()();
+            if(!this.profile.ConfirmPassword)
              {
-                this.rePassword = "Re-Enter your password here";
+               
                 this.error[6] = true;  
                 this.qualityInput[6] = true;              
              }
              else{
-                 if(this.isPasswordCorrect(this.profile.RePassword) && this.profile.RePassword == this.profile.Password)
+                 if(this.profile.ConfirmPassword == this.profile.Password)
                  {
                       this.qualityInput[6] = false;
                       this.error[6] = false; 
+                      this.isDisableValid();
                  }
                  else
                  {
                        this.qualityInput[6] = true;
-                       this.rePassword = "Password does not match";
+                      
                  }
              }
             }
             
+            
         },
         
-        async save() {
-            
-            try { 
-                this.changePage = await services.postApplication(this.profile);
-            }
-            catch(error) {
-               alert(error, "Failed to save application", error);
-            }
-        }
+       
     }
 
 </script>

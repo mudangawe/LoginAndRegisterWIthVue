@@ -1,6 +1,4 @@
 import Configuration from "./config";
-
-
 let post = function(url,body,async)
 {
     return new Promise((resolve,reject) => {
@@ -9,7 +7,7 @@ let post = function(url,body,async)
             if(http.readyState==4)
             {
                 if(http.status == 200)
-                {
+                {   
                     resolve(http.response);
                 }
                 else{
@@ -18,12 +16,10 @@ let post = function(url,body,async)
             }
         }
         http.open('POST',url,async);
-      
         http.setRequestHeader('Content-type','application/json');
         http.send(JSON.stringify(body));
     }
     );
-
 }
 
 let get = function (url, async) {
@@ -33,16 +29,17 @@ let get = function (url, async) {
         http.onreadystatechange = function () {
             if (http.readyState == 4) {
                 if (http.status == 200) {
-                    resolve(http.responseText);
+                
+                    resolve("ted");
                 }
                 else {
-                    reject(http.response);
+                    reject(http.ResponseType);
                 }
             }
         }
 
         http.open('GET', url, async);
-        http.responseType = 'text';
+        http.response = 'text';
         http.send();
     });
 }
