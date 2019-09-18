@@ -7,9 +7,6 @@
       <input type="email" class="form-control" v-model="email" placeholder="Email">
     </div>
   </div>
-  
-          
-       
     <div class="form-group row">
         <label  class="col-sm-3 col-form-label">Password <span v-show="isPasswordValid" class="text-danger">*</span>
         </label>
