@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Source\\loginwithVuw\\LoginWebBackEnd\\LoginWebBackEnd\\LoginWebBackEnd.csproj": {}
+    "C:\\Source\\Vue Project\\loginwithVuw\\LoginWebBackEnd\\LoginWebBackEnd\\LoginWebBackEnd.csproj": {}
   },
   "projects": {
-    "C:\\Source\\loginwithVuw\\LoginWebBackEnd\\LoginWebBackEnd\\LoginWebBackEnd.csproj": {
+    "C:\\Source\\Vue Project\\loginwithVuw\\LoginWebBackEnd\\LoginWebBackEnd\\LoginWebBackEnd.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Source\\loginwithVuw\\LoginWebBackEnd\\LoginWebBackEnd\\LoginWebBackEnd.csproj",
+        "projectUniqueName": "C:\\Source\\Vue Project\\loginwithVuw\\LoginWebBackEnd\\LoginWebBackEnd\\LoginWebBackEnd.csproj",
         "projectName": "LoginWebBackEnd",
-        "projectPath": "C:\\Source\\loginwithVuw\\LoginWebBackEnd\\LoginWebBackEnd\\LoginWebBackEnd.csproj",
+        "projectPath": "C:\\Source\\Vue Project\\loginwithVuw\\LoginWebBackEnd\\LoginWebBackEnd\\LoginWebBackEnd.csproj",
         "packagesPath": "C:\\Users\\v-girama\\.nuget\\packages\\",
-        "outputPath": "C:\\Source\\loginwithVuw\\LoginWebBackEnd\\LoginWebBackEnd\\obj\\",
+        "outputPath": "C:\\Source\\Vue Project\\loginwithVuw\\LoginWebBackEnd\\LoginWebBackEnd\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -78,10 +78,16 @@
             }
           },
           "imports": [
-            "net461"
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
           ],
           "assetTargetFallback": true,
-          "warn": true
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -84,8 +84,6 @@ export default {
             },
             error:[false,false,false,false,false,false,false],
             qualityInput:[true,true,true,true,false,true,true],
-          
-            
         }
     },
     computed:{
